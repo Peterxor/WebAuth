@@ -1,6 +1,7 @@
 import Vapor
 import Leaf
 import FluentSQLite
+import Authentication
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
     let router = EngineRouter.default()
@@ -18,5 +19,13 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     var migrations = MigrationConfig()
     migrations.add(model: User.self, database: .sqlite)
     services.register(migrations)
+    
+    try services.register(AuthenticationProvider())
+    var middlewares = MiddlewareConfig.default()
+    middlewares.use(SessionsMiddleware.self)
+    services.register(middlewares)
+    
+    config.prefer(MemoryKeyedCache.self, for: KeyedCache.self)
+    
 }
 
