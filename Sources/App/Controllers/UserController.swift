@@ -28,24 +28,7 @@ final class UserController{
     }
     
     func login(req: Request) throws -> Future<Response>{
-        return try req.content.decode(User.self).flatMap({ user in
-            return User.query(on: req).filter(\User.email==user.email).first().flatMap({ result in
-                if let _ = result{
-                    if try BCryptDigest().verify(user.password, created: (result?.password)!){
-                        return Future.map(on: req, { () in
-                            return req.redirect(to: "/success")
-                        })
-                    }else{
-                        return Future.map(on: req, { () in
-                            return req.redirect(to: "/wrongpassword")
-                        })
-                    }
-                }
-                return Future.map(on: req, { () in
-                    return req.redirect(to: "/register")
-                })
-            })
-        })
+        
     }
     
 }
