@@ -39,4 +39,9 @@ final class UserController{
         })
     }
     
+    func profile(req: Request) throws -> Future<View>{
+        let user = try req.requireAuthenticated(User.self)
+        let data = ["user": user]
+        return try req.view().render("profile", data)
+    }
 }
