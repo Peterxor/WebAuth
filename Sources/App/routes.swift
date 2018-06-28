@@ -12,4 +12,6 @@ public func routes(_ router: Router) throws {
     
     let protectorRouter = authenticationRouter.grouped(RedirectMiddleware<User>(path: "/login"))
     protectorRouter.get("profile", use: UserController().profile)
+    
+    router.get("logout", use: UserController().logout)
 }

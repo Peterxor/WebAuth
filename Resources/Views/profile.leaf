@@ -12,7 +12,11 @@
                     <div class="card-body">
                         <h2 class="card-title">Profile</h2>
                         <p>Email: #(user.email)</p>
-                        <button class="btn btn-danger text-right" type="submit">Log Out</button>
+                        <div class="text-right">
+                            <form method="GET" action="/logout">
+                                <button class="btn btn-danger" type="submit">Log Out</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

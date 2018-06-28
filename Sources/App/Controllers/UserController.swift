@@ -44,4 +44,11 @@ final class UserController{
         let data = ["user": user]
         return try req.view().render("profile", data)
     }
+    
+    func logout(req: Request) throws -> Future<Response>{
+        try req.unauthenticateSession(User.self)
+        return Future.map(on: req, { () in
+            return req.redirect(to: "/login")
+        })
+    }
 }
