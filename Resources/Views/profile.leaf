@@ -12,6 +12,7 @@
                     <div class="card-body">
                         <h2 class="card-title">Profile</h2>
                         <p>Email: #(user.email)</p>
+                        <button class="btn btn-danger text-right" type="submit">Log Out</button>
                     </div>
                 </div>
             </div>
