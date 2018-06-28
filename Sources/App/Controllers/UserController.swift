@@ -28,7 +28,15 @@ final class UserController{
     }
     
     func login(req: Request) throws -> Future<Response>{
-        
+        return try req.content.decode(User.self).flatMap({ user in
+            return User.authenticate(username: user.email, password: user.password, using: BCryptDigest(), on: req).map({ user in
+                guard let user = user else{
+                    return req.redirect(to: "/login")
+                }
+                try req.authenticateSession(user)
+                return req.redirect(to: "/profile")
+            })
+        })
     }
     
 }

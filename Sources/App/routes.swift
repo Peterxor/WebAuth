@@ -7,5 +7,6 @@ public func routes(_ router: Router) throws {
     router.post("register", use: UserController().register)
     router.get("login", use: UserController().renderLogin)
     
-    
+    let authenticationRouter = router.grouped(User.authSessionsMiddleware())
+    authenticationRouter.post("login", use: UserController().login)
 }

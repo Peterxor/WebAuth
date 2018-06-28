@@ -24,5 +24,5 @@ extension User: PasswordAuthenticatable{
         return \User.password
     }
 }
-
 extension User: SessionAuthenticatable{}
+
